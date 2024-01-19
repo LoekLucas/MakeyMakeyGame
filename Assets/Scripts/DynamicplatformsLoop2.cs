@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class Dynamicplatforms : MonoBehaviour
+public class DynamicplatformsLoop2 : MonoBehaviour
 {
     public float exactInternalTimer = 0;
     public float internalTimer = 0;
-    public bool platformExists = true;
+    public bool platformExists = false;
+    public float delay = 4;
+
 
     private BoxCollider2D myCollider;
 
@@ -20,9 +22,12 @@ public class Dynamicplatforms : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() 
+    { 
+
         exactInternalTimer += Time.deltaTime;
+        
+
         if (exactInternalTimer >= 1)
         {
             exactInternalTimer = 0;
@@ -30,7 +35,7 @@ public class Dynamicplatforms : MonoBehaviour
         }
 
         if (internalTimer / 4 == 1)
-        {   
+        {
             if (platformExists)
             {
                 internalTimer = 0;

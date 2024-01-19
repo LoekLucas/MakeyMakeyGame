@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -13,12 +14,22 @@ public class CharacterMovement : MonoBehaviour
     public float gravityScale = 1.5f;
     public Camera mainCamera;
 
+    public float exactInternalTimer = 0;
+    public float exactInternalTimer2 = 0;
+
+    public float internalTimer = 0;
+    public float internalTimer2 = 0;
+    public float delay = 4;
+
     float moveDirection = 0;
     bool isGrounded = false;
     Vector3 cameraPos;
     Rigidbody2D r2d;
     BoxCollider2D mainCollider;
     Transform t;
+
+    public TMP_Text timerText;
+    public TMP_Text timerText2;
 
     // Use this for initialization
     void Start()
@@ -39,6 +50,41 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        delay -= Time.deltaTime;
+
+        exactInternalTimer += Time.deltaTime;
+        if (exactInternalTimer >= 1)
+        {
+            exactInternalTimer = 0;
+            internalTimer++;
+        }
+
+        if (delay <= 0)
+        {
+            exactInternalTimer2 += Time.deltaTime;
+            if (exactInternalTimer2 >= 1)
+            {
+                exactInternalTimer2 = 0;
+                internalTimer2++;
+            }
+        }
+
+
+        if (internalTimer >= 4)
+        {
+            internalTimer = 0;
+        }
+
+        if (internalTimer2 >= 4)
+        {
+            internalTimer2 = 0;
+        }
+
+        timerText.text = "First cycle: " + internalTimer;
+        timerText2.text = "Second cycle: " + internalTimer2;
+
+
+
         // Movement controls
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
         {
