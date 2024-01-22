@@ -15,11 +15,9 @@ public class CharacterMovement : MonoBehaviour
     public Camera mainCamera;
 
     public float exactInternalTimer = 0;
-    public float exactInternalTimer2 = 0;
 
     public float internalTimer = 0;
-    public float internalTimer2 = 0;
-    public float delay = 4;
+
 
     float moveDirection = 0;
     bool isGrounded = false;
@@ -50,7 +48,6 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        delay -= Time.deltaTime;
 
         exactInternalTimer += Time.deltaTime;
         if (exactInternalTimer >= 1)
@@ -59,29 +56,14 @@ public class CharacterMovement : MonoBehaviour
             internalTimer++;
         }
 
-        if (delay <= 0)
-        {
-            exactInternalTimer2 += Time.deltaTime;
-            if (exactInternalTimer2 >= 1)
-            {
-                exactInternalTimer2 = 0;
-                internalTimer2++;
-            }
-        }
-
-
         if (internalTimer >= 4)
         {
             internalTimer = 0;
         }
 
-        if (internalTimer2 >= 4)
-        {
-            internalTimer2 = 0;
-        }
 
-        timerText.text = "First cycle: " + internalTimer;
-        timerText2.text = "Second cycle: " + internalTimer2;
+        timerText.text = "Cycle: " + internalTimer;
+
 
 
 
